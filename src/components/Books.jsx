@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Products = () => {
+const Books = () => {
     return (  
         <React.Fragment>
-            <h2 className="text-center my-5">Products List</h2>
+            <h2 className="text-center my-5">Books List</h2>
 
             <table className="table table-striped">
                 <thead className="bg-primary table-dark">
@@ -21,4 +21,4 @@ const Products = () => {
     );
 }
  
-export default Products;
+export default Books;

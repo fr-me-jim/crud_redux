@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 //components
 import Header from './components/Header'
-import Products from './components/Products'
-import NewProduct from './components/NewProduct'
-import EditProduct from './components/EditProduct'
+import Books from './components/Books'
+import NewBook from './components/NewBook'
+import EditBook from './components/EditBook'
 
 //redux
 import { Provider } from 'react-redux'
@@ -21,9 +21,9 @@ function App() {
 
         <div className="container">
           <Switch>
-          <Route exact path="/" component={ Products } />
-          <Route exact path="/products/new" component={ NewProduct } />
-          <Route exact path="/products/edit/:id" component={ EditProduct } />
+          <Route exact path="/" component={ Books } />
+          <Route exact path="/books/new" component={ NewBook } />
+          <Route exact path="/books/edit/:id" component={ EditBook } />
 
           </Switch>
         </div>

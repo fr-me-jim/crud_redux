@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 //actions
 import { useDispatch } from 'react-redux'
-import { addNewProduct } from '../actions/productsActions';
+import { addNewBook } from '../actions/booksActions';
 
-const NewProduct = () => {
+const NewBook = () => {
 
     //state
     const [ name, setName ] = useState('');
@@ -12,7 +12,7 @@ const NewProduct = () => {
 
     //create new Product
     const dispatch = useDispatch();
-    const addProduct = product => dispatch( addNewProduct(product) );
+    const addProduct = book => dispatch( addNewBook(book) );
 
     //Add new product
     const handleSubmit = e => {
@@ -31,7 +31,7 @@ const NewProduct = () => {
 
         //if all good : 
 
-        //create new product
+        //create new book
 
         //redirect
 
@@ -81,4 +81,4 @@ const NewProduct = () => {
     );
 }
  
-export default NewProduct;
+export default NewBook;

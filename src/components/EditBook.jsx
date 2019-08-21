@@ -1,9 +1,9 @@
 import React from 'react';
 
-const EditProduct = () => {
+const EditBook = () => {
     return (  
         <p>from edit</p>
     );
 }
  
-export default EditProduct;
+export default EditBook;
