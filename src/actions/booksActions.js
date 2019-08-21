@@ -14,11 +14,17 @@ export function addNewBook (book) {
         //insert into api
         axiosClient.post('/books', book)
             .then( response => {
-                //insert it
-                dispatch( newBookSuccess(book) );
+                if ( response.status === 201 ) {
+                    //if all good -> insert it
+                    dispatch( newBookSuccess(book) );
+                }
             })
             .catch( error => {
-                console.log(error);
+                const { status } = error.response;
+                if ( status === 404 || status === 403 || status === 400 ) {
+                    //report error
+                    dispatch( newBookFail() );
+                }
             });
 
     }
@@ -31,4 +37,8 @@ export const newBook = () => ({
 export const newBookSuccess = product => ({
     type: ADD_BOOK_SUCCESS,
     payload: product
+});
+
+export const newBookFail = () => ({
+    type: ADD_BOOK_FAIL
 });

@@ -29,8 +29,7 @@ export default function (state = initialState, action) {
         case ADD_BOOK_FAIL:
             return {
                 ...state,
-                error: true,
-                loading: false,
+                error: true
             }
 
         default:
