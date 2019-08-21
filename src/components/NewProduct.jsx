@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 
+//actions
+import { useDispatch } from 'react-redux'
+import { addNewProduct } from '../actions/productsActions';
+
 const NewProduct = () => {
 
     //state
     const [ name, setName ] = useState('');
     const [ price, setPrice ] = useState('');
 
+    //create new Product
+    const dispatch = useDispatch();
+    const addProduct = product => dispatch( addNewProduct(product) );
 
     //Add new product
     const handleSubmit = e => {
         e.preventDefault();
+
+        addProduct({
+            name,
+            price
+        });
 
         //validate form
         if ( name.trim() === '' || price.trim() === '' ) {
