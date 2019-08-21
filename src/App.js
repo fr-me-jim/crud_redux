@@ -21,9 +21,9 @@ function App() {
 
         <div className="container">
           <Switch>
-          <Route exact path="/" component={Products} />
-          <Route exact path="/products/new" component={NewProduct} />
-          <Route exact path="/products/edit/:id" component={EditProduct} />
+          <Route exact path="/" component={ Products } />
+          <Route exact path="/products/new" component={ NewProduct } />
+          <Route exact path="/products/edit/:id" component={ EditProduct } />
 
           </Switch>
         </div>
