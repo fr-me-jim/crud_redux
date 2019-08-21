@@ -21,6 +21,11 @@ h1 a.text-light:hover {
   color: white!important;
   text-decoration: none!important;
 }
+nav {
+  background-color: #002B36;
+  color:  white;
+}
+
 .new-post{
   font-weight: bold;
   text-transform: uppercase;
