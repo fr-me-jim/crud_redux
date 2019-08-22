@@ -7,7 +7,7 @@ import {
 import axiosClient from '../config/axios'
 
 //Main Function - add new book
-export function addNewBook (book) {
+export function addNewBookAction (book) {
     return (dispatch) => {
         dispatch( newBook() );
 
