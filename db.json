@@ -24,6 +24,11 @@
       "name": "Angular",
       "price": "50",
       "id": 5
+    },
+    {
+      "name": "JSON",
+      "price": "45",
+      "id": 6
     }
   ]
 }

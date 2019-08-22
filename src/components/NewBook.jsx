@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 //actions
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addNewBookAction } from '../actions/booksActions';
 import { validateFormAction, validationError, validationSuccess } from '../actions/validationActions';
 
-const NewBook = () => {
+const NewBook = ({history}) => {
 
     //state
     const [ name, setName ] = useState('');
@@ -17,6 +17,9 @@ const NewBook = () => {
     const validateForm = () => dispatch( validateFormAction() );
     const successForm = () => dispatch( validationSuccess() );
     const errorForm = () => dispatch( validationError() );
+
+    //get state
+    const error = useSelector( state => state.error.error );
 
     //Add new product
     const handleSubmit = e => {
@@ -33,15 +36,14 @@ const NewBook = () => {
         //if all good : 
         successForm();
 
+        //add new book
         addProduct({
             name,
             price
         });
 
-        //create new book
-
         //redirect
-
+        history.push('/');
     }
     
     return (  
@@ -50,6 +52,14 @@ const NewBook = () => {
                 <div className="card">
                     <div className="card-body">
                         <h2 className="text-center mb-4 font-weight-bold text-dark ">Add New Book</h2>
+
+                        { error ? 
+                            <div className="alert alert-danger text-center mt-4">
+                                All fields are mandatory!
+                            </div> 
+                            : null 
+                        }
+
                         <form
                             onSubmit={handleSubmit}
                         >
