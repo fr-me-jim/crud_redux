@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 //actions
 import { useDispatch } from 'react-redux'
-import { addNewBook } from '../actions/booksActions';
+import { addNewBookAction } from '../actions/booksActions';
+import { validateFormAction, validationError, validationSuccess } from '../actions/validationActions';
 
 const NewBook = () => {
 
@@ -12,24 +13,30 @@ const NewBook = () => {
 
     //create new Product
     const dispatch = useDispatch();
-    const addProduct = book => dispatch( addNewBook(book) );
+    const addProduct = book => dispatch( addNewBookAction(book) );
+    const validateForm = () => dispatch( validateFormAction() );
+    const successForm = () => dispatch( validationSuccess() );
+    const errorForm = () => dispatch( validationError() );
 
     //Add new product
     const handleSubmit = e => {
         e.preventDefault();
 
-        addProduct({
-            name,
-            price
-        });
+        validateForm();
 
         //validate form
         if ( name.trim() === '' || price.trim() === '' ) {
-            console.log('error in validation');
+            errorForm();
             return;
         }
 
         //if all good : 
+        successForm();
+
+        addProduct({
+            name,
+            price
+        });
 
         //create new book
 
