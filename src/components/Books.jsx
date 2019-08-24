@@ -27,14 +27,14 @@ const Books = () => {
 
     return (  
         <Fragment>
-            <h2 className="text-center text-dark my-5">Books List</h2>
+            <h2 className="text-center text-primary my-5">Books List</h2>
 
             <table className="table table-striped">
-                <thead className="bg-primary table-dark">
+                <thead className="bg-dark table-dark">
                     <tr align="center">
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col" className="text-light" >Name</th>
+                        <th scope="col" className="text-light" >Price</th>
+                        <th scope="col" className="text-light" >Actions</th>
                     </tr>   
                 </thead>
                 <tbody>

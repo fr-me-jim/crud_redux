@@ -51,7 +51,7 @@ const NewBook = ({history}) => {
             <div className="col-md-8">
                 <div className="card">
                     <div className="card-body">
-                        <h2 className="text-center mb-4 font-weight-bold text-dark ">Add New Book</h2>
+                        <h2 className="text-center mb-4 font-weight-bold text-primary ">Add New Book</h2>
 
                         { error ? 
                             <div className="alert alert-danger text-center mt-4">

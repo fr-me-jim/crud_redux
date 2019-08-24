@@ -85,7 +85,7 @@ export const downloadFail = () => ({
 });
 
 // delete book -- main function
-export function deleteBookAction (id) {  
+export function deleteBookAction( id ) {  
     return dispatch => {
         dispatch( getDeleteBook() );
 
@@ -117,7 +117,7 @@ export const deleteFail = () => ({
 });
 
 // get edit book -- main function
-export function editBookAction(id) {  
+export function getEditBookAction( id ) {  
     return dispatch => {
         dispatch( getEditBook() );
 
@@ -146,3 +146,36 @@ export const getEditSuccess = book => ({
 export const getEditFail = () => ({
     type: GET_BOOK_FAIL
 });
+
+// edit book -- main function
+export function editBookAction( book ) {
+    return dispatch => {
+        dispatch( editBook() );
+
+        //query API
+        axiosClient.put(`/books/${book.id}`, book)
+            .then( response => {
+                console.log(response);
+                dispatch( editBookSuccess(book) );
+            } )
+            .catch( error => {
+                console.log(error);
+                dispatch( editBookFail() );
+            } );
+    }
+}
+
+export const editBook = () => ({
+    type: EDIT_BOOK
+});
+
+export const editBookSuccess = book => ({
+    type: EDIT_BOOK_SUCCESS,
+    payload: book
+});
+
+export const editBookFail = () => ({
+    type: EDIT_BOOK_FAIL
+});
+
+

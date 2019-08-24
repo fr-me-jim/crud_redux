@@ -49,13 +49,13 @@ const Book = ({book}) => {
             <td className="actions" >
                 <Link 
                     to={`/books/edit/${book.id}`} 
-                    className="btn btn-primary mr-2"    
-                >Edit</Link>
+                    className="btn btn-success mr-2"    
+                >&#9998; Edit</Link>
 
                 <button 
                     className="btn btn-danger"
                     onClick={ () => handleClick(book.id) }
-                >Delete</button>
+                >&times; Delete</button>
             </td>
         </tr>
     );
