@@ -15,5 +15,9 @@ export const DELETE_BOOK_SUCCESS = 'DELETE_BOOK_SUCCESS';
 export const DELETE_BOOK_FAIL = 'DELETE_BOOK_FAIL'; 
 
 export const GET_EDIT_BOOK = 'GET_EDIT_BOOK';
+export const GET_BOOK_SUCCESS = 'GET_BOOK_SUCCESS';
+export const GET_BOOK_FAIL = 'GET_BOOK_FAIL';
+
+export const EDIT_BOOK = 'EDIT_BOOK';
 export const EDIT_BOOK_SUCCESS = 'EDIT_BOOK_SUCCESS';
-export const EDIT_BOOK_FAIL = 'EDIT_BOOK_FAIL';
+export const EDIT_BOOK_FAIL = 'EDIT_BOOK_FAIL'; 

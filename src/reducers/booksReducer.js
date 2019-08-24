@@ -9,6 +9,9 @@ import {
     DELETE_BOOK_SUCCESS,
     DELETE_BOOK_FAIL,
     GET_EDIT_BOOK,
+    GET_BOOK_SUCCESS,
+    GET_BOOK_FAIL,
+    EDIT_BOOK,
     EDIT_BOOK_SUCCESS,
     EDIT_BOOK_FAIL
 } from '../types';
@@ -17,7 +20,8 @@ import {
 const initialState = {
     books: [],
     error: null,
-    loading: false
+    loading: false,
+    book: {}
 }
     
 export default function (state = initialState, action) {
@@ -44,7 +48,8 @@ export default function (state = initialState, action) {
         case DOWNLOAD_BOOKS:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                book: {}
             }
 
         case DOWNLOAD_BOOKS_SUCCESS:
@@ -52,7 +57,8 @@ export default function (state = initialState, action) {
                 ...state,
                 books: action.payload,
                 loading: false,
-                error: null
+                error: null,
+                book: {}
             }
 
         case DOWNLOAD_BOOKS_FAIL:
@@ -60,7 +66,8 @@ export default function (state = initialState, action) {
                 ...state,
                 books: [],
                 error: true,
-                loading: false
+                loading: false,
+                book: {}
             }
 
         case GET_DELETE_BOOK:
@@ -88,11 +95,31 @@ export default function (state = initialState, action) {
                 error: null
             }
 
-        case EDIT_BOOK_SUCCESS:
+        case GET_BOOK_SUCCESS:
             return {
                 ...state,
                 error: null,
                 book: action.payload
+            }
+
+        case GET_BOOK_FAIL:
+            return {
+                ...state,
+                error: true
+            }
+
+        case EDIT_BOOK:
+            return {
+                ...state,
+                error: null
+            }
+
+        case EDIT_BOOK_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                book: state.books.map( book => book.id === action.payload.id ? 
+                    book = action.payload : book)
             }
 
         case EDIT_BOOK_FAIL:

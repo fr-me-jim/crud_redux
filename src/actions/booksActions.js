@@ -9,6 +9,9 @@ import {
     DELETE_BOOK_SUCCESS,
     DELETE_BOOK_FAIL,
     GET_EDIT_BOOK,
+    GET_BOOK_SUCCESS,
+    GET_BOOK_FAIL,
+    EDIT_BOOK,
     EDIT_BOOK_SUCCESS,
     EDIT_BOOK_FAIL
 } from '../types';
@@ -43,9 +46,9 @@ export const newBook = () => ({
     type: ADD_BOOK
 });
 
-export const newBookSuccess = BOOK => ({
+export const newBookSuccess = book => ({
     type: ADD_BOOK_SUCCESS,
-    payload: product
+    payload: book
 });
 
 export const newBookFail = () => ({
@@ -113,13 +116,33 @@ export const deleteFail = () => ({
     type: DELETE_BOOK_FAIL
 });
 
-// edit book -- main function
+// get edit book -- main function
 export function editBookAction(id) {  
     return dispatch => {
         dispatch( getEditBook() );
+
+        //get book from API
+        axiosClient.get(`/books/${id}`)
+            .then( response => {
+                console.log(response);
+                dispatch( getEditSuccess(response.data) );
+            } )
+            .catch( error => {
+                console.log(error);
+                dispatch( getEditFail() );
+            } );
     }
 }
 
 export const getEditBook = () => ({
     type: GET_EDIT_BOOK
-})
+});
+
+export const getEditSuccess = book => ({
+    type: GET_BOOK_SUCCESS,
+    payload: book
+});
+
+export const getEditFail = () => ({
+    type: GET_BOOK_FAIL
+});
