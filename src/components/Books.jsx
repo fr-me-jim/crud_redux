@@ -1,8 +1,12 @@
 import React, { Fragment, useEffect } from 'react';
 
+//components
+import Book from './Book';
+
 //actions
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooksAction } from '../actions/booksActions';
+
 
 const Books = () => {
 
@@ -19,10 +23,11 @@ const Books = () => {
     // get the state
     const loading = useSelector( state => state.books.loading );
     const error = useSelector( state => state.books.error );
+    const { books } = useSelector( state => state.books );
 
     return (  
         <Fragment>
-            <h2 className="text-center my-5">Books List</h2>
+            <h2 className="text-center text-dark my-5">Books List</h2>
 
             <table className="table table-striped">
                 <thead className="bg-primary table-dark">
@@ -33,7 +38,12 @@ const Books = () => {
                     </tr>   
                 </thead>
                 <tbody>
-
+                    { books.map( book => (
+                        <Book
+                            key={book.id}
+                            book={book}
+                        />
+                    ) ) }
                 </tbody>
             </table>
             { error ? 

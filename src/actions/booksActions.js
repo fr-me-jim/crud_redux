@@ -4,7 +4,13 @@ import {
     ADD_BOOK_FAIL,
     DOWNLOAD_BOOKS,
     DOWNLOAD_BOOKS_SUCCESS,
-    DOWNLOAD_BOOKS_FAIL
+    DOWNLOAD_BOOKS_FAIL,
+    GET_DELETE_BOOK,
+    DELETE_BOOK_SUCCESS,
+    DELETE_BOOK_FAIL,
+    GET_EDIT_BOOK,
+    EDIT_BOOK_SUCCESS,
+    EDIT_BOOK_FAIL
 } from '../types';
 
 import axiosClient from '../config/axios'
@@ -37,7 +43,7 @@ export const newBook = () => ({
     type: ADD_BOOK
 });
 
-export const newBookSuccess = product => ({
+export const newBookSuccess = BOOK => ({
     type: ADD_BOOK_SUCCESS,
     payload: product
 });
@@ -73,4 +79,47 @@ export const downloadSuccess = books => ({
 
 export const downloadFail = () => ({
     type: DOWNLOAD_BOOKS_FAIL
+});
+
+// delete book -- main function
+export function deleteBookAction (id) {  
+    return dispatch => {
+        dispatch( getDeleteBook() );
+
+        // delete from API
+        axiosClient.delete(`/books/${id}`)
+            .then( response => {
+                if( response.status === 200 )
+                    dispatch( deleteSuccess(id) );
+            } )
+            .catch( error => {
+                console.log(error);
+
+                dispatch( deleteFail() );
+            } );
+    }
+}
+
+export const getDeleteBook = () => ({
+    type: GET_DELETE_BOOK
+});
+
+export const deleteSuccess = id => ({
+    type: DELETE_BOOK_SUCCESS,
+    payload: id
+}); 
+
+export const deleteFail = () => ({
+    type: DELETE_BOOK_FAIL
+});
+
+// edit book -- main function
+export function editBookAction(id) {  
+    return dispatch => {
+        dispatch( getEditBook() );
+    }
+}
+
+export const getEditBook = () => ({
+    type: GET_EDIT_BOOK
 })

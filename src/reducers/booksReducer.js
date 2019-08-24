@@ -4,7 +4,13 @@ import {
     ADD_BOOK_FAIL,
     DOWNLOAD_BOOKS,
     DOWNLOAD_BOOKS_SUCCESS,
-    DOWNLOAD_BOOKS_FAIL
+    DOWNLOAD_BOOKS_FAIL,
+    GET_DELETE_BOOK,
+    DELETE_BOOK_SUCCESS,
+    DELETE_BOOK_FAIL,
+    GET_EDIT_BOOK,
+    EDIT_BOOK_SUCCESS,
+    EDIT_BOOK_FAIL
 } from '../types';
 
 //reducer's state
@@ -46,7 +52,7 @@ export default function (state = initialState, action) {
                 ...state,
                 books: action.payload,
                 loading: false,
-                error: false
+                error: null
             }
 
         case DOWNLOAD_BOOKS_FAIL:
@@ -55,6 +61,44 @@ export default function (state = initialState, action) {
                 books: [],
                 error: true,
                 loading: false
+            }
+
+        case GET_DELETE_BOOK:
+            return {
+                ...state,
+                error: null
+            }
+
+        case DELETE_BOOK_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                books: state.books.filter( book => book.id !== action.payload )
+            }
+
+        case DELETE_BOOK_FAIL:
+            return {
+                ...state,
+                error: true
+            }
+
+        case GET_EDIT_BOOK:
+            return {
+                ...state,
+                error: null
+            }
+
+        case EDIT_BOOK_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                book: action.payload
+            }
+
+        case EDIT_BOOK_FAIL:
+            return {
+                ...state,
+                error: true
             }
 
         default:
