@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 //actions
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,9 +18,10 @@ const Books = () => {
 
     // get the state
     const loading = useSelector( state => state.books.loading );
+    const error = useSelector( state => state.books.error );
 
     return (  
-        <React.Fragment>
+        <Fragment>
             <h2 className="text-center my-5">Books List</h2>
 
             <table className="table table-striped">
@@ -35,9 +36,14 @@ const Books = () => {
 
                 </tbody>
             </table>
-
+            { error ? 
+                <div className="alert alert-danger font-weight-bold text-center mt-4">
+                    Something went wrong!
+                </div>
+                : null
+            }
             { loading ? 'Loading...' : null }
-        </React.Fragment>
+        </Fragment>
     );
 }
  
