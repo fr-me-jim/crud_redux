@@ -1,7 +1,10 @@
 import {
     ADD_BOOK,
     ADD_BOOK_SUCCESS,
-    ADD_BOOK_FAIL
+    ADD_BOOK_FAIL,
+    DOWNLOAD_BOOKS,
+    DOWNLOAD_BOOKS_SUCCESS,
+    DOWNLOAD_BOOKS_FAIL
 } from '../types';
 
 //reducer's state
@@ -30,6 +33,28 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 error: true
+            }
+
+        case DOWNLOAD_BOOKS:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case DOWNLOAD_BOOKS_SUCCESS:
+            return {
+                ...state,
+                books: action.payload,
+                loading: false,
+                error: false
+            }
+
+        case DOWNLOAD_BOOKS_FAIL:
+            return {
+                ...state,
+                books: [],
+                error: true,
+                loading: false
             }
 
         default:

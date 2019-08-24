@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+//actions
+import { useDispatch, useSelector } from 'react-redux';
+import { getBooksAction } from '../actions/booksActions';
 
 const Books = () => {
+
+    //dispatch
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        //get products on component mounted
+        const loadBooks = () => dispatch( getBooksAction() ); 
+
+        loadBooks();
+    }, []);
+
+    // get the state
+    const loading = useSelector( state => state.books.loading );
+
     return (  
         <React.Fragment>
             <h2 className="text-center my-5">Books List</h2>
@@ -17,6 +35,8 @@ const Books = () => {
 
                 </tbody>
             </table>
+
+            { loading ? 'Loading...' : null }
         </React.Fragment>
     );
 }

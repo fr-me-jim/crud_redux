@@ -87,7 +87,7 @@ const NewBook = ({history}) => {
 
                             <button 
                                 type="submit" 
-                                className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
+                                className="btn btn-info font-weight-bold text-uppercase d-block w-100"
                             > Add </button>
                         </form>
         

@@ -1,7 +1,10 @@
 import {
     ADD_BOOK,
     ADD_BOOK_SUCCESS,
-    ADD_BOOK_FAIL
+    ADD_BOOK_FAIL,
+    DOWNLOAD_BOOKS,
+    DOWNLOAD_BOOKS_SUCCESS,
+    DOWNLOAD_BOOKS_FAIL
 } from '../types';
 
 import axiosClient from '../config/axios'
@@ -42,3 +45,32 @@ export const newBookSuccess = product => ({
 export const newBookFail = () => ({
     type: ADD_BOOK_FAIL
 });
+
+// get books via API -- main function
+export function getBooksAction() {
+    return dispatch => {
+        dispatch( getBooksStart() );
+
+        //queryAPI
+        axiosClient.get('/books')
+            .then( response => {
+                dispatch( downloadSuccess(response.data) );
+            } )
+            .catch( error => {
+                dispatch( downloadFail() );
+            } );
+    }
+}
+
+export const getBooksStart = () => ({
+    type: DOWNLOAD_BOOKS
+});
+
+export const downloadSuccess = books => ({
+    type: DOWNLOAD_BOOKS_SUCCESS,
+    payload: books
+});
+
+export const downloadFail = () => ({
+    type: DOWNLOAD_BOOKS_FAIL
+})
