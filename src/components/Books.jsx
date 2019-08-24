@@ -18,7 +18,7 @@ const Books = () => {
         const loadBooks = () => dispatch( getBooksAction() ); 
 
         loadBooks();
-    }, []);
+    }, [dispatch]);
 
     // get the state
     const loading = useSelector( state => state.books.loading );
