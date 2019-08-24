@@ -16,7 +16,9 @@ import {
     EDIT_BOOK_FAIL
 } from '../types';
 
-import axiosClient from '../config/axios'
+import axiosClient from '../config/axios';
+import Swal from 'sweetalert2';
+
 
 //Main Function - add new book
 export function addNewBookAction (book) {
@@ -96,8 +98,6 @@ export function deleteBookAction( id ) {
                     dispatch( deleteSuccess(id) );
             } )
             .catch( error => {
-                console.log(error);
-
                 dispatch( deleteFail() );
             } );
     }
@@ -124,11 +124,10 @@ export function getEditBookAction( id ) {
         //get book from API
         axiosClient.get(`/books/${id}`)
             .then( response => {
-                console.log(response);
-                dispatch( getEditSuccess(response.data) );
+                if( response.status === 200 )
+                    dispatch( getEditSuccess(response.data) );
             } )
             .catch( error => {
-                console.log(error);
                 dispatch( getEditFail() );
             } );
     }
@@ -155,8 +154,15 @@ export function editBookAction( book ) {
         //query API
         axiosClient.put(`/books/${book.id}`, book)
             .then( response => {
-                console.log(response);
-                dispatch( editBookSuccess(book) );
+                if( response.status === 200 ) {
+                    dispatch( editBookSuccess(book) );
+                    
+                    Swal.fire(
+                        'Saved changes!',
+                        'The book has been updated succesfully.',
+                        'success'
+                    );
+                }
             } )
             .catch( error => {
                 console.log(error);

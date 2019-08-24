@@ -3,8 +3,9 @@ import React, { useEffect, useRef } from 'react';
 //actions
 import { useDispatch, useSelector } from 'react-redux';
 import { getEditBookAction, editBookAction } from '../actions/booksActions';
+import { validateFormAction, validationError, validationSuccess } from '../actions/validationActions';
 
-const EditBook = ({ match }) => {
+const EditBook = ({ history, match }) => {
 
     // refs
     const nameRef = useRef('');
@@ -13,6 +14,10 @@ const EditBook = ({ match }) => {
     //dispatch
     const dispatch = useDispatch();
     const editBook = book => dispatch( editBookAction(book) );
+
+    const validateForm = () => dispatch( validateFormAction() );
+    const successForm = () => dispatch( validationSuccess() );
+    const errorForm = () => dispatch( validationError() );
 
     //id
     const { id } = match.params;
@@ -25,6 +30,8 @@ const EditBook = ({ match }) => {
     //get state
     const book = useSelector( state => state.books.book );
     const { error } = useSelector( state => state.books );
+    const errForm = useSelector( state => state.error.error );
+
 
     //when loading
     if(!book) return 'Loading..';
@@ -37,17 +44,24 @@ const EditBook = ({ match }) => {
         const price = priceRef.current.value;
 
         // validate form 
+        validateForm()
+        if ( name.trim() === '' || price.trim() === '' ) {
+            errorForm();
+            return;
+        }
 
         // if all good:
+        successForm();
 
         // save changes
         editBook({
+            id,
             name,
             price
         });
 
         // redirect
-
+        history.push('/');
     }
 
     return (  
@@ -56,6 +70,13 @@ const EditBook = ({ match }) => {
                 <div className="card">
                     <div className="card-body">
                         <h2 className="text-center text-primary">Edit Book</h2>
+
+                        { errForm ? 
+                            <div className="alert alert-danger text-center mt-4">
+                                All fields are mandatory!
+                            </div> 
+                            : null 
+                        }
 
                         { error ? 
                             <div className="alert alert-danger font-weight-bold text-center mt-4">
