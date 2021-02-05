@@ -29,7 +29,7 @@ function App() {
         </div>
       </Provider>
     </Router>
-  );
+  ); 
 }
 
 export default App;
